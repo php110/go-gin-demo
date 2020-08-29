@@ -36,5 +36,17 @@ func main() {
 		c.String(http.StatusOK, "Hello %s %s", firstname, lastname)
 	})
 
+	// 获取Post参数
+	r.POST("/form_post", func(c *gin.Context) {
+		message := c.PostForm("message")
+		nick := c.DefaultQuery("nick", "anonymous")
+
+		c.JSON(http.StatusOK, gin.H{
+			"code":    http.StatusOK,
+			"message": message,
+			"nick":    nick,
+		})
+	})
+
 	r.Run()
 }
