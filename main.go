@@ -29,5 +29,12 @@ func main() {
 		c.String(http.StatusOK, message)
 	})
 
+	// 获取Get参数 匹配的url格式:  /welcome?firstname=Jane&lastname=Doe
+	r.GET("/welcome", func(c *gin.Context) {
+		firstname := c.DefaultQuery("firstname", "pan")
+		lastname := c.Query("lastname")
+		c.String(http.StatusOK, "Hello %s %s", firstname, lastname)
+	})
+
 	r.Run()
 }
